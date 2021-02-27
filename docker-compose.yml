@@ -3,7 +3,7 @@ version: "3.8"
 services:
   aceitacao:
     image: node:15.10.0-alpine3.13
-    working_dir: /ws
+    working_dir: /ws/aceitacao
     volumes:
     - .:/ws
     entrypoint: /bin/sh -c 'tail -f'
