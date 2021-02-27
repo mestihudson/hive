@@ -1,13 +1,25 @@
-const { Given, When, Then } = require('@cucumber/cucumber')
+const { Before, Given, When, Then } = require('@cucumber/cucumber')
+const Runner = require('./Runner')
 
-Given(`eu sou um visitante`, () => {
-  return `pending`
+let runner
+
+Before(() => {
+  runner = new Runner()
 })
 
-When(`eu me registro`, () => {
-  return `pending`
+Given(`eu sou um visitante`, async () => {
+  await runner.abrir()
 })
 
-Then(`eu sou um usuário`, () => {
-  return `pending`
+When(`eu me registro`, async () => {
+  await runner.registro()
+  await runner.preencher(
+    "usuario@email.com",
+    "P@ssw0rD"
+  )
+  await runner.registrar()
+})
+
+Then(`eu sou um usuário`, async () => {
+  await runner.registrado("usuario@email.com")
 })
