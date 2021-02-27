@@ -1,5 +1,11 @@
 {
   "name": "aceitacao",
   "version": "1.0.0",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon --exec 'yarn cucumber' -e 'feature,json,js'"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
 }
