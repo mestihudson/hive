@@ -6,4 +6,4 @@ services:
     working_dir: /ws/aceitacao
     volumes:
     - .:/ws
-    entrypoint: /bin/sh -c 'tail -f'
+    entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
