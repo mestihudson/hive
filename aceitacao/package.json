@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "cucumber": "cucumber-js",
     "dev": "nodemon --exec 'yarn cucumber' -e 'feature,json,js'"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "^7.0.0",
     "nodemon": "^2.0.7"
   }
 }
