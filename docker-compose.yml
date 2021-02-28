@@ -46,6 +46,7 @@ services:
     environment:
       HOST: 0.0.0.0
       PORT: 7000
+    stdin_open: true
     networks:
       hive:
         ipv4_address: 13.13.13.5
