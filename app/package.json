@@ -1,0 +1,11 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "live-server --port=7000 --host=0.0.0.0 --no-browser"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

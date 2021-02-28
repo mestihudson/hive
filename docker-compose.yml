@@ -21,3 +21,12 @@ services:
     - .selenium-node.env
     volumes:
     - .:/ws
+
+  app:
+    image: node:15.10.0-alpine3.13
+    working_dir: /ws/app
+    volumes:
+    - .:/ws
+    entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
+    ports:
+    - 17000:7000
