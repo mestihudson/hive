@@ -7,3 +7,17 @@ services:
     volumes:
     - .:/ws
     entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
+
+  hub:
+    image: selenium/hub:3.141.59
+    ports:
+    - 4444
+
+  chrome:
+    image: selenium/node-chrome-debug:3.141.59
+    ports:
+    - 15900:5900
+    env_file:
+    - .selenium-node.env
+    volumes:
+    - .:/ws
