@@ -40,7 +40,7 @@ services:
     working_dir: /ws/app
     volumes:
     - .:/ws
-    entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
+    entrypoint: /bin/sh -c 'yarn install && yarn start; tail -f'
     ports:
     - 17000:7000
     networks:
