@@ -43,6 +43,9 @@ services:
     entrypoint: /bin/sh -c 'yarn install && yarn start; tail -f'
     ports:
     - 17000:7000
+    environment:
+      HOST: 0.0.0.0
+      PORT: 7000
     networks:
       hive:
         ipv4_address: 13.13.13.5
