@@ -1,5 +1,12 @@
 version: "3.8"
 
+networks:
+  hive:
+    name: hive
+    ipam:
+      config:
+      - subnet: 13.13.13.0/24
+
 services:
   aceitacao:
     image: node:15.10.0-alpine3.13
@@ -7,11 +14,15 @@ services:
     volumes:
     - .:/ws
     entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
+    networks:
+    - hive
 
   hub:
     image: selenium/hub:3.141.59
     ports:
     - 4444
+    networks:
+    - hive
 
   chrome:
     image: selenium/node-chrome-debug:3.141.59
@@ -21,6 +32,8 @@ services:
     - .selenium-node.env
     volumes:
     - .:/ws
+    networks:
+    - hive
 
   app:
     image: node:15.10.0-alpine3.13
@@ -30,3 +43,6 @@ services:
     entrypoint: /bin/sh -c 'yarn install && yarn dev; tail -f'
     ports:
     - 17000:7000
+    networks:
+      hive:
+        ipv4_address: 13.13.13.5
