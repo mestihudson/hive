@@ -11,7 +11,7 @@ class Runner {
         .usingServer("http://hub:4444/wd/hub")
         .build()
     }
-    await this.driver.get("http://app:7000")
+    await this.driver.get("http://13.13.13.5:7000")
   }
 
   async registro () {
