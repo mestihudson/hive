@@ -48,6 +48,10 @@ class Runner {
         .to.be(`Usuário ${email} registrado com sucesso`)
     }
   }
+
+  async fechar() {
+    await this.driver.quit()
+  }
 }
 
 module.exports = Runner

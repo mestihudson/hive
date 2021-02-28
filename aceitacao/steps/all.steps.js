@@ -1,10 +1,14 @@
-const { Before, Given, When, Then } = require('@cucumber/cucumber')
+const { After, Before, Given, When, Then } = require('@cucumber/cucumber')
 const Runner = require('./Runner')
 
 let runner
 
 Before(() => {
   runner = new Runner()
+})
+
+After(async () => {
+  runner.fechar()
 })
 
 Given(`eu sou um visitante`, async () => {
