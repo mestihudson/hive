@@ -19,6 +19,6 @@ describe("<Raiz/>", () => {
 
   it("deve apresentar link para página de registro", () => {
     const { container } = renderRaiz()
-    expect(container.querySelector("[data-testid='link-registro']")).toHaveTextContent("Registro")
+    expect(container.querySelector("[data-trigger='Registro']")).toHaveTextContent("Registro")
   })
 })
