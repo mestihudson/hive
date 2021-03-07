@@ -5,7 +5,7 @@ import Raiz from "./Raiz"
 
 describe("<Raiz/>", () => {
   const renderRaiz = () => {
-    render(
+    return render(
       <Router>
         <Raiz/>
       </Router>
@@ -18,7 +18,7 @@ describe("<Raiz/>", () => {
   })
 
   it("deve apresentar link para página de registro", () => {
-    renderRaiz()
-    expect(screen.getByTestId("link-registro")).toHaveTextContent("Registro")
+    const { container } = renderRaiz()
+    expect(container.querySelector("[data-testid='link-registro']")).toHaveTextContent("Registro")
   })
 })
