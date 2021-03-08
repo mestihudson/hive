@@ -43,6 +43,7 @@ class Runner {
     const components = await this.driver.findElements(
       By.xpath("//*[@data-component='Mensagem']")
     )
+    expect(components.length).to.be.equal(1)
     for(let component of components) {
       expect(await component.getText())
         .to.be(`Usuário ${email} registrado com sucesso`)
