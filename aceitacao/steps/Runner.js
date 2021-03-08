@@ -25,7 +25,7 @@ class Runner {
     const inputEmail = await this.driver.findElement(
       By.xpath("//*[@data-input='Email']")
     )
-    await input.sendKeys(email)
+    await inputEmail.sendKeys(email)
     const inputSenha = await this.driver.findElement(
       By.xpath("//*[@data-input='Senha']")
     )
