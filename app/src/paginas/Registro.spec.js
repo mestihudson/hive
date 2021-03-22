@@ -71,7 +71,7 @@ describe("<Registro/>", () => {
   it("deve disparar api quando acionado botão 'Registrar'", async () => {
     Api.registrar.mockImplementation(() => Promise.resolve())
     await registrar(payload)
-    expect(Api.registrar).toHaveBeenCalledWith(payload.email, payload.senha)
+    expect(Api.registrar).toHaveBeenCalledWith(payload)
   })
 
   it("deve apresentar mensagem de sucesso para retorno da api", async () => {
