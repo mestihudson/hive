@@ -4,6 +4,7 @@ Feature: Registro
   Eu quero poder me registrar
   Para que eu possa me autenticar
 
+  @ok
   Scenario: deve criar conta de usuário
     Given eu sou um visitante
     When eu me registro

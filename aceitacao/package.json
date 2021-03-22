@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "cucumber": "cucumber-js --format @cucumber/pretty-formatter --publish-quiet --require steps",
+    "cucumber": "cucumber-js --format @cucumber/pretty-formatter --publish-quiet --require steps --tags @ok",
     "dev": "nodemon --exec 'yarn cucumber' -e 'feature,json,js'"
   },
   "devDependencies": {
