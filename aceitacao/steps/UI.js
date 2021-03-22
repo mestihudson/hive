@@ -1,7 +1,7 @@
 const { Builder, By } = require('selenium-webdriver')
 const { expect } = require('chai')
 
-class Runner {
+class UI {
   constructor () {}
 
   async abrir () {
@@ -14,14 +14,7 @@ class Runner {
     await this.driver.get("http://13.13.13.5:7000")
   }
 
-  async registro () {
-    const trigger = await this.driver.findElement(
-      By.xpath("//*[@data-trigger='Registro']")
-    )
-    await trigger.click()
-  }
-
-  async preencher (email, senha) {
+  async preencherRegistro (email, senha) {
     const inputEmail = await this.driver.findElement(
       By.xpath("//*[@data-input='Email']")
     )
@@ -39,15 +32,16 @@ class Runner {
     await trigger.click()
   }
 
-  async registrado (email) {
+  async mensagemPresente (mensagem) {
+    console.error(mensagem)
     const components = await this.driver.findElements(
       By.xpath("//*[@data-component='Mensagem']")
     )
-    expect(components.length).to.be.equal(1)
+    let result = components.length === 1
     for(let component of components) {
-      expect(await component.getText())
-        .to.be(`Usuário ${email} registrado com sucesso`)
+      result = await component.getText() === mensagem
     }
+    return result
   }
 
   async fechar() {
@@ -55,4 +49,4 @@ class Runner {
   }
 }
 
-module.exports = Runner
+module.exports = UI
