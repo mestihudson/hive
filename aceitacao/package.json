@@ -12,5 +12,8 @@
     "chai": "^4.3.0",
     "nodemon": "^2.0.7",
     "selenium-webdriver": "^4.0.0-beta.1"
+  },
+  "dependencies": {
+    "pg": "^8.5.1"
   }
 }
