@@ -9,7 +9,7 @@ function Registro() {
   const [mensagem, setMensagem] = useState("")
 
   const registrarClick = () => {
-    Api.registrar(email, senha)
+    Api.registrar({ email, senha })
       .then(() => {
         setMensagem(`Usuário ${email} registrado com sucesso`)
         setMostrarMensagem(true)
