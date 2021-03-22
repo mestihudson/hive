@@ -50,3 +50,24 @@ services:
     networks:
       hive:
         ipv4_address: 13.13.13.5
+
+  db:
+    image: postgres:9.6.15-alpine
+    ports:
+    - 5432
+    volumes:
+    - .:/ws
+    - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      PGDATESTYLE: iso, dmy
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres12345678
+      PGPORT: 5432
+      PGUSER: postgres
+      PGDATABASE: postgres
+      PGPASSWORD: postgres12345678
+    entrypoint: /ws/db/wrapper.sh
+    command: ["postgres", "-c", "logging_collector=on", "-c", "log_directory=/logs", "-c", "log_filename=postgresql.log", "-c", "log_statement=all"]
+    networks:
+    - hive
