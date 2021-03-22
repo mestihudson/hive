@@ -1,29 +1,45 @@
-const { After, Before, Given, When, Then } = require('@cucumber/cucumber')
-const Runner = require('./Runner')
+const {
+  After, Before, Given, When, Then, setDefaultTimeout
+} = require("@cucumber/cucumber")
+const { expect } = require("chai")
 
-let runner
+const DB = require("./DB")
+const UI = require("./UI")
+
+let ui
+let db
+let usuario
+
+setDefaultTimeout(2 * 60 * 1000)
 
 Before(() => {
-  runner = new Runner()
+  db = new DB()
+  ui = new UI()
+  usuario = { email: "usuario@email.com", senha: "P@ssw0rD" }
+})
+
+Before(async () => {
+  await db.limpar()
 })
 
 After(async () => {
-  runner.fechar()
+  await ui.fechar()
+  await db.fechar()
 })
 
-Given(`eu sou um visitante`, async () => {
-  await runner.abrir()
+Given("eu sou um visitante", async () => {
+  expect(await db.usuarioPresente(usuario.email)).to.be.false
 })
 
-When(`eu me registro`, async () => {
-  await runner.registro()
-  await runner.preencher(
-    "usuario@email.com",
-    "P@ssw0rD"
-  )
-  await runner.registrar()
+When("eu me registro", async () => {
+  await ui.abrir()
+  await ui.preencherRegistro(usuario.email, usuario.senha)
+  await ui.registrar()
 })
 
-Then(`eu sou um usuário`, async () => {
-  await runner.registrado("usuario@email.com")
+Then("eu sou um usuário", async () => {
+  expect(
+    await ui.mensagemPresente(`Usuário ${usuario.email} registrado com sucesso`)
+  ).to.be.true
+  expect(await db.usuarioPresente(usuario.email)).to.be.true
 })
