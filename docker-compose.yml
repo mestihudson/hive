@@ -51,6 +51,25 @@ services:
       hive:
         ipv4_address: 13.13.13.5
 
+  api:
+    image: maven:3.6.2-jdk-8
+    working_dir: /ws/api
+    volumes:
+    - .:/ws
+    - $HOME/.m2:/root/.m2
+    entrypoint: /bin/bash -c "mvn quarkus:dev; tail -f"
+    ports:
+    - 18080:8080
+    - 15005:5005
+    environment:
+      PORT: 8080
+      HOST: 0.0.0.0
+      DB_URL: jdbc:postgresql://db:5432/postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres12345678
+    networks:
+    - hive
+
   db:
     image: postgres:9.6.15-alpine
     ports:
