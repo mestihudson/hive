@@ -1,0 +1,19 @@
+{
+  "name": "aceitacao",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "cucumber": "cucumber-js --format @cucumber/pretty-formatter --publish-quiet --require steps --tags @ok",
+    "dev": "nodemon --exec 'yarn cucumber' -e 'feature,json,js'"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^7.0.0",
+    "@cucumber/pretty-formatter": "^1.0.0-alpha.0",
+    "chai": "^4.3.0",
+    "nodemon": "^2.0.7",
+    "selenium-webdriver": "^4.0.0-beta.1"
+  },
+  "dependencies": {
+    "pg": "^8.5.1"
+  }
+}
