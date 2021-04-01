@@ -3,6 +3,9 @@ package hive;
 
 import io.agroal.api.AgroalDataSource;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.inject.Inject;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -27,6 +30,9 @@ public class Main {
     if (!senhaValida(usuario.senha)) {
       return Response.status(400).build();
     }
+    if (emailJaVinculado(usuario.email)) {
+      return Response.status(400).build();
+    }
     ds.getConnection().createStatement().executeUpdate(
       String.format(
         "insert into usuarios values (nextval('usuarios_id_seq'), '%s', '%s')",
@@ -49,5 +55,15 @@ public class Main {
 
   private boolean senhaValida(final String valor) {
     return valor.length() >= 8;
+  }
+
+  private boolean emailJaVinculado(final String valor) throws SQLException {
+    final ResultSet rs = ds.getConnection().createStatement().executeQuery(
+      String.format(
+        "select count(id) as quant from usuarios where email = '%s'",
+        valor
+      )
+    );
+    return rs.next() && rs.getString("quant").equals("1");
   }
 }
