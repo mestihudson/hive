@@ -9,6 +9,7 @@ const UI = require("./UI")
 let ui
 let db
 let usuario
+let emailInvalido = "1"
 
 setDefaultTimeout(2 * 60 * 1000)
 
@@ -43,4 +44,18 @@ Then("eu consigo criar uma conta de usuário", async () => {
     await ui.mensagemPresente(`Usuário ${usuario.email} registrado com sucesso`)
   ).to.be.true
   expect(await db.usuarioPresente(usuario.email)).to.be.true
+})
+
+When("eu tento me registrar com um email inválido", async () => {
+  await ui.abrir()
+  await ui.preencherRegistro(emailInvalido, usuario.senha)
+  await ui.registrar()
+})
+
+Then("eu não consigo criar uma conta de usuário", async () => {
+  await new Promise(f => setTimeout(f, 1000))
+  expect(
+    await ui.mensagemPresente(`Usuário ${usuario.email} registrado com sucesso`)
+  ).to.be.false
+  expect(await db.usuarioPresente(usuario.email)).to.be.false
 })
