@@ -24,6 +24,9 @@ public class Main {
     if (!emailTemFormatoValido(usuario.email)) {
       return Response.status(400).build();
     }
+    if (!senhaValida(usuario.senha)) {
+      return Response.status(400).build();
+    }
     ds.getConnection().createStatement().executeUpdate(
       String.format(
         "insert into usuarios values (nextval('usuarios_id_seq'), '%s', '%s')",
@@ -42,5 +45,9 @@ public class Main {
       resultado = false;
     }
     return resultado;
+  }
+
+  private boolean senhaValida(final String valor) {
+    return valor.length() >= 8;
   }
 }
