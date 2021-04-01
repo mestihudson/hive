@@ -34,42 +34,43 @@ Given("que eu sou um visitante", async () => {
 })
 
 When("eu tento me registrar", async () => {
-  await ui.abrir()
-  await ui.preencherRegistro(usuario.email, usuario.senha)
-  await ui.registrar()
+  await registrarCom(usuario.email, usuario.senha)
 })
 
 Then("eu consigo criar uma conta de usuário", async () => {
-  await new Promise(f => setTimeout(f, 1000))
-  expect(
-    await ui.mensagemPresente(`Usuário ${usuario.email} registrado com sucesso`)
-  ).to.be.true
-  expect(await db.usuarioPresente(usuario.email, usuario.senha)).to.be.true
+  await usuarioRegistrado(usuario.email, usuario.senha, true)
 })
 
 When("eu tento me registrar com um email inválido", async () => {
-  await ui.abrir()
-  await ui.preencherRegistro(emailInvalido, usuario.senha)
-  await ui.registrar()
+  await registrarCom(emailInvalido, usuario.senha)
 })
 
 When("eu tento me registrar com uma senha inválida", async () => {
-  await ui.abrir()
-  await ui.preencherRegistro(usuario.email, senhaInvalida)
-  await ui.registrar()
+  await registrarCom(usuario.email, senhaInvalida)
 })
 
 When("eu tento me registrar com um email já vinculado", async () => {
   await db.criarContaCom(usuario.email)
-  await ui.abrir()
-  await ui.preencherRegistro(usuario.email, usuario.senha)
-  await ui.registrar()
+  await registrarCom(usuario.email, usuario.senha)
 })
 
 Then("eu não consigo criar uma conta de usuário", async () => {
+  await usuarioRegistrado(usuario.email, usuario.senha, false)
+})
+
+const registrarCom = async (email, senha) => {
+  await ui.abrir()
+  await ui.preencherRegistro(email, senha)
+  await ui.registrar()
+}
+
+const usuarioRegistrado = async (email, senha, registrado) => {
   await new Promise(f => setTimeout(f, 1000))
   expect(
-    await ui.mensagemPresente(`Usuário ${usuario.email} registrado com sucesso`)
-  ).to.be.false
-  expect(await db.usuarioPresente(usuario.email, usuario.senha)).to.be.false
-})
+    await ui
+      .mensagemPresente(`Usuário ${usuario.email} registrado com sucesso`)
+  )
+    .to.be.equal(registrado)
+  expect(await db.usuarioPresente(usuario.email, usuario.senha))
+    .to.be.equal(registrado)
+}
