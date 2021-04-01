@@ -4,6 +4,8 @@ package hive;
 import io.agroal.api.AgroalDataSource;
 
 import javax.inject.Inject;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -19,6 +21,9 @@ public class Main {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response criarConta(final Usuario usuario) throws Throwable {
+    if (!emailTemFormatoValido(usuario.email)) {
+      return Response.status(400).build();
+    }
     ds.getConnection().createStatement().executeUpdate(
       String.format(
         "insert into usuarios values (nextval('usuarios_id_seq'), '%s', '%s')",
@@ -27,5 +32,15 @@ public class Main {
       )
     );
     return Response.status(201).build();
+  }
+
+  private boolean emailTemFormatoValido(final String valor) {
+    boolean resultado = true;
+    try {
+      new InternetAddress(valor).validate();
+    } catch (AddressException ae) {
+      resultado = false;
+    }
+    return resultado;
   }
 }
