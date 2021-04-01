@@ -17,6 +17,7 @@ Funcionalidade: Criar conta
     Quando eu tento me registrar com um email inválido
     Então eu não consigo criar uma conta de usuário
 
+  @ok
   Cenário: Deve falhar para senha inválida
     Dado que eu sou um visitante
     Quando eu tento me registrar com uma senha inválida

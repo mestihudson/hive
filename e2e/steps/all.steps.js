@@ -10,6 +10,7 @@ let ui
 let db
 let usuario
 let emailInvalido = "1"
+let senhaInvalida = "1"
 
 setDefaultTimeout(2 * 60 * 1000)
 
@@ -49,6 +50,12 @@ Then("eu consigo criar uma conta de usuário", async () => {
 When("eu tento me registrar com um email inválido", async () => {
   await ui.abrir()
   await ui.preencherRegistro(emailInvalido, usuario.senha)
+  await ui.registrar()
+})
+
+When("eu tento me registrar com uma senha inválida", async () => {
+  await ui.abrir()
+  await ui.preencherRegistro(usuario.email, senhaInvalida)
   await ui.registrar()
 })
 
