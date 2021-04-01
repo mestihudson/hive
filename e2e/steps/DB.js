@@ -23,13 +23,27 @@ class DB {
     await this.client.query("alter sequence usuarios_id_seq restart with 1;")
   }
 
-  async usuarioPresente(email) {
+  async usuarioPresente(email, senha) {
     if (!this.client) {
       await this.abrir()
     }
-    const result = await this.client
-      .query(`select count(id) from usuarios where email = '${email}'`)
+    const result = await this.client.query(`
+      select count(id)
+      from usuarios where email = '${email}' and senha = '${senha}'
+    `)
     return result.rows[0].count === "1"
+  }
+
+  async criarContaCom(email) {
+    if (!this.client) {
+      await this.abrir()
+    }
+    const result = await this.client.query(`
+      insert into
+        usuarios (id, email, senha)
+      values
+        (nextval('usuarios_id_seq'), '${email}', 'senha');
+    `)
   }
 
   async fechar () {

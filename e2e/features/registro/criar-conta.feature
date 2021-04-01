@@ -23,6 +23,7 @@ Funcionalidade: Criar conta
     Quando eu tento me registrar com uma senha inválida
     Então eu não consigo criar uma conta de usuário
 
+  @ok
   Cenário: Deve falhar para email já vinculado
     Dado que eu sou um visitante
     Quando eu tento me registrar com um email já vinculado
