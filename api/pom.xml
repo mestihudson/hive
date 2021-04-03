@@ -18,6 +18,7 @@
     <quarkus.platform.version>1.10.5.Final</quarkus.platform.version>
     <version.assertj-core>3.19.0</version.assertj-core>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
+    <version.lombok>1.18.16</version.lombok>
     <version.javax.mail-api>1.6.2</version.javax.mail-api>
   </properties>
   <dependencyManagement>
@@ -71,6 +72,12 @@
       <artifactId>assertj-core</artifactId>
       <version>${version.assertj-core}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${version.lombok}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
