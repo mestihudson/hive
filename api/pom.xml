@@ -16,6 +16,7 @@
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>1.10.5.Final</quarkus.platform.version>
+    <version.assertj-core>3.19.0</version.assertj-core>
     <version.maven-surefire-plugin>2.22.2</version.maven-surefire-plugin>
     <version.javax.mail-api>1.6.2</version.javax.mail-api>
   </properties>
@@ -64,6 +65,12 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-flyway</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${version.assertj-core}</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
