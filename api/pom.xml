@@ -16,6 +16,7 @@
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <quarkus.platform.version>1.10.5.Final</quarkus.platform.version>
+    <version.javax.mail-api>1.6.2</version.javax.mail-api>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -65,8 +66,8 @@
     </dependency>
     <dependency>
       <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4.7</version>
+      <artifactId>javax.mail-api</artifactId>
+      <version>${version.javax.mail-api}</version>
     </dependency>
   </dependencies>
   <build>
