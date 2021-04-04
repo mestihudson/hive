@@ -34,7 +34,6 @@ public class CriarContaService implements CriarContaUseCase {
       .email(command.getEmail())
       .senha(command.getSenha())
       .build();
-    System.out.println(usuario.toString());
     criarContaPort.criarConta(usuario);
   }
 }
