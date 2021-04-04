@@ -157,5 +157,36 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>it</id>
+      <build>
+        <defaultGoal>clean test</defaultGoal>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${version.maven-surefire-plugin}</version>
+            <executions>
+              <execution>
+                <id>default-test</id>
+                <phase>none</phase>
+              </execution>
+              <execution>
+                <id>integration-tests</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <reportFormat>plain</reportFormat>
+                  <includes>
+                    <include>**/integration/**/*Spec.java</include>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
