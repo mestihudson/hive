@@ -9,9 +9,13 @@ import io.agroal.api.AgroalDataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 
+@Default
+@ApplicationScoped
 public class UsuariosJdbcRepository
   implements EmailVinculadoValidator, CriarContaPort {
   private final AgroalDataSource ds;

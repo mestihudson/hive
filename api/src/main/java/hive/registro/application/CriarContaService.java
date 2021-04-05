@@ -5,9 +5,13 @@ import hive.registro.application.port.in.*;
 import hive.registro.application.port.out.*;
 import hive.registro.domain.*;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 
+@Default
+@ApplicationScoped
 public class CriarContaService implements CriarContaUseCase {
   private final EmailValidator emailValidator;
   private final SenhaValidator senhaValidator;

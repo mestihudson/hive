@@ -1,6 +1,12 @@
 package hive.registro.domain;
 
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
+
+
+@Default
+@ApplicationScoped
 public class SenhaValidatorDefault implements SenhaValidator {
   public void validar(final String valor) {
     final String tratado = valor.trim();
