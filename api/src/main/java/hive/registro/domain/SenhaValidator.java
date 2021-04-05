@@ -2,5 +2,5 @@ package hive.registro.domain;
 
 
 public interface SenhaValidator {
-  public void validar(final String valor);
+  public SenhaValidator validar(final String valor);
 }

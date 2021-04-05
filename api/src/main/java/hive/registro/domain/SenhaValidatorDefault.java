@@ -7,22 +7,21 @@ import javax.enterprise.inject.Default;
 
 @Default
 @ApplicationScoped
-public class SenhaValidatorDefault implements SenhaValidator {
-  public void validar(final String valor) {
-    final String tratado = valor.trim();
-    tamanhoMenorQue8(tratado);
-    tamanhoMaiorQue20(tratado);
+public class SenhaValidatorDefault extends BaseSenhaValidator {
+  public SenhaValidatorDefault() {
+    this(
+     new SenhaComTamanhoMaiorQueOito(
+        new SenhaComTamanhoMenorQueVinte()
+      )
+    );
   }
 
-  private void tamanhoMenorQue8(final String valor) {
-    if (valor.length() < 8) {
-      throw new SenhaInvalidaException();
-    }
+  public SenhaValidatorDefault(final SenhaValidator delegate) {
+    super(delegate);
   }
 
-  private void tamanhoMaiorQue20(final String valor) {
-    if (valor.length() > 20) {
-      throw new SenhaInvalidaException();
-    }
+  @Override
+  public SenhaValidator validar(final String valor) {
+    return super.validar(valor);
   }
 }
