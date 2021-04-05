@@ -2,12 +2,13 @@ package hive.registro.application.port.in;
 
 
 import lombok.*;
-import lombok.experimental.*;
 
 
 @Builder
 @Getter
 public class CriarContaCommand {
+  @NonNull
   private final String email;
+  @NonNull
   private final String senha;
 }
