@@ -37,4 +37,19 @@ public class UsuariosJdbcRepository
     }
   }
 
+  @Override
+  public void criarConta(final Usuario usuario) {
+    try {
+      ds.getConnection().createStatement().executeUpdate(
+        String.format(
+          "insert into usuarios values (%s, '%s', '%s')",
+          "nextval('usuarios_id_seq')",
+          usuario.getEmail(),
+          usuario.getSenha()
+        )
+      );
+    } catch (SQLException sqle) {
+      throw new DomainException(sqle);
+    }
+  }
 }
