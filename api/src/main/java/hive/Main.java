@@ -27,6 +27,9 @@ public class Main {
     } catch (AddressException ae) {
       return Response.status(400).build();
     }
+    if (usuario.senha.length() < 8) {
+      return Response.status(400).build();
+    }
     ds.getConnection().createStatement().executeUpdate(
       String.format(
         "insert into usuarios values (nextval('usuarios_id_seq'), '%s', '%s')",
