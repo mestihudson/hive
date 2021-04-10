@@ -55,6 +55,9 @@ public class Main {
 
   private boolean senhaValida(final String valor) {
     return valor.length() >= 8;
+  public static class Usuario {
+    public String email;
+    public String senha;
   }
 
   private boolean emailJaVinculado(final String valor) throws SQLException {
@@ -66,4 +69,6 @@ public class Main {
     );
     return rs.next() && rs.getString("quant").equals("1");
   }
+  @ApplicationPath("/api")
+  public static class AppConfig extends Application {}
 }
