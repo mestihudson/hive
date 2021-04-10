@@ -30,6 +30,15 @@ public class Main {
     if (usuario.senha.length() < 8) {
       return Response.status(400).build();
     }
+    final ResultSet rs = ds.getConnection().createStatement().executeQuery(
+      String.format(
+        "select count(id) as quant from usuarios where email = '%s'",
+        valor
+      )
+    );
+    if (rs.next() && rs.getString("quant").equals("1")) {
+      return Response.status(400).build();
+    }
     ds.getConnection().createStatement().executeUpdate(
       String.format(
         "insert into usuarios values (nextval('usuarios_id_seq'), '%s', '%s')",
