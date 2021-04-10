@@ -3,12 +3,10 @@ package hive;
 
 import io.agroal.api.AgroalDataSource;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 import javax.inject.Inject;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import javax.mail.internet.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -24,13 +22,21 @@ public class Main {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response criarConta(final Usuario usuario) throws Throwable {
-    if (!emailTemFormatoValido(usuario.email)) {
+    try {
+      new InternetAddress(usuario.email).validate();
+    } catch (AddressException ae) {
       return Response.status(400).build();
     }
-    if (!senhaValida(usuario.senha)) {
+    if (usuario.senha.length() < 8) {
       return Response.status(400).build();
     }
-    if (emailJaVinculado(usuario.email)) {
+    final ResultSet rs = ds.getConnection().createStatement().executeQuery(
+      String.format(
+        "select count(id) as quant from usuarios where email = '%s'",
+        valor
+      )
+    );
+    if (rs.next() && rs.getString("quant").equals("1")) {
       return Response.status(400).build();
     }
     ds.getConnection().createStatement().executeUpdate(
@@ -43,32 +49,11 @@ public class Main {
     return Response.status(201).build();
   }
 
-  private boolean emailTemFormatoValido(final String valor) {
-    boolean resultado = true;
-    try {
-      new InternetAddress(valor).validate();
-    } catch (AddressException ae) {
-      resultado = false;
-    }
-    return resultado;
-  }
-
-  private boolean senhaValida(final String valor) {
-    return valor.length() >= 8;
   public static class Usuario {
     public String email;
     public String senha;
   }
 
-  private boolean emailJaVinculado(final String valor) throws SQLException {
-    final ResultSet rs = ds.getConnection().createStatement().executeQuery(
-      String.format(
-        "select count(id) as quant from usuarios where email = '%s'",
-        valor
-      )
-    );
-    return rs.next() && rs.getString("quant").equals("1");
-  }
   @ApplicationPath("/api")
   public static class AppConfig extends Application {}
 }
