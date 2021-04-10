@@ -6,6 +6,7 @@ import io.agroal.api.AgroalDataSource;
 import java.sql.*;
 
 import javax.inject.Inject;
+import javax.mail.internet.*;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -21,6 +22,11 @@ public class Main {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   public Response criarConta(final Usuario usuario) throws Throwable {
+    try {
+      new InternetAddress(usuario.email).validate();
+    } catch (AddressException ae) {
+      return Response.status(400).build();
+    }
     ds.getConnection().createStatement().executeUpdate(
       String.format(
         "insert into usuarios values (nextval('usuarios_id_seq'), '%s', '%s')",
