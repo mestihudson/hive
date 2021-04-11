@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import Api from "../servicos/Api"
+import Api from "../componentes/Api"
 
 function Registro() {
   const [email, setEmail] = useState("")
