@@ -1,8 +1,7 @@
 package hive.registro.domain;
 
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
