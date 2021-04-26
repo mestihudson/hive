@@ -27,7 +27,7 @@ public class Main {
     } catch (AddressException ae) {
       return Response.status(400).build();
     }
-    if (usuario.senha.length() < 8) {
+    if (usuario.senha.trim().length() < 8 || usuario.senha.trim().length() > 20) {
       return Response.status(400).build();
     }
     final ResultSet rs = ds.getConnection().createStatement().executeQuery(
