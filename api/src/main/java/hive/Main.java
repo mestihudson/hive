@@ -33,7 +33,7 @@ public class Main {
     final ResultSet rs = ds.getConnection().createStatement().executeQuery(
       String.format(
         "select count(id) as quant from usuarios where email = '%s'",
-        valor
+        usuario.email
       )
     );
     if (rs.next() && rs.getString("quant").equals("1")) {
