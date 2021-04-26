@@ -9,8 +9,6 @@ const UI = require("./UI")
 let ui
 let db
 let usuario
-let emailInvalido = "1"
-let senhaInvalida = "1"
 
 setDefaultTimeout(2 * 60 * 1000)
 
@@ -41,12 +39,12 @@ Then("eu consigo criar uma conta de usuário", async () => {
   await usuarioRegistrado(usuario.email, usuario.senha, true)
 })
 
-When("eu tento me registrar com um email inválido", async () => {
-  await registrarCom(emailInvalido, usuario.senha)
+When("eu tento me registrar com um email inválido: {string}", async (email) => {
+  await registrarCom(email, usuario.senha)
 })
 
-When("eu tento me registrar com uma senha inválida", async () => {
-  await registrarCom(usuario.email, senhaInvalida)
+When("eu tento me registrar com uma senha inválida: {string}", async (senha) => {
+  await registrarCom(usuario.email, senha)
 })
 
 When("eu tento me registrar com um email já vinculado", async () => {
