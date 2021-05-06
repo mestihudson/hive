@@ -21,6 +21,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
+    "test:u": "craco test --roots='test/unit' --verbose --testMatch='**/*.spec.js'",
     "eject": "craco eject"
   },
   "eslintConfig": {
