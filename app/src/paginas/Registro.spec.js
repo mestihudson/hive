@@ -1,10 +1,10 @@
 import { render, fireEvent, cleanup } from "@testing-library/react"
 import { act } from 'react-dom/test-utils'
 
-import Api from "../componentes/Api"
-import Registro from "./Registro"
+import Api from "@/componentes/Api"
+import Registro from "@/paginas/Registro"
 
-jest.mock("../componentes/Api")
+jest.mock("@/componentes/Api")
 
 describe("<Registro/>", () => {
   beforeEach(jest.resetAllMocks)
