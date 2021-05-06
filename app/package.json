@@ -22,6 +22,7 @@
     "build": "craco build",
     "test": "yarn test:u --ci --watchAll=false",
     "test:u": "craco test --roots='test/unit' --verbose --testMatch='**/*.spec.js'",
+    "test:i:pact": "craco test --roots='test/integration/pact' --verbose --testMatch='**/*.spec.js'",
     "eject": "craco eject"
   },
   "eslintConfig": {
