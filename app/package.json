@@ -20,7 +20,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test": "yarn test:u --ci --watchAll=false",
     "test:u": "craco test --roots='test/unit' --verbose --testMatch='**/*.spec.js'",
     "eject": "craco eject"
   },
